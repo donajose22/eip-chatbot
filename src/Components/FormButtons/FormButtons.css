@@ -1,0 +1,93 @@
+.react-chatbot-kit-chat-input-buttons {
+    min-width: 398.5px;
+    width: calc(35% - 1.5px);
+    height: fit-content;
+    min-height: 40px;
+    position: fixed;
+    right: 25px;
+    bottom: 90px;
+    /* background-color: #fff; */
+    /* border: solid 1px #d8d8d8; */
+    background-color: #293344;
+    border: solid 1px #293344;
+    border-top: solid 1px #d8d8d8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    /* width: calc(98% - 1.5px); */
+}
+
+.react-chatbot-kit-chat-input-buttons button {
+    width: 46%;
+    height: fit-content;
+    padding: 6px;
+    margin: 4px;
+    /* color: #157acc;
+    background-color: #E9E9E9; */
+    color: white;
+    background-color: #525d73;
+    font-weight: normal;
+    font-size: 0.9rem;
+    max-height: 40px;
+    border: none;
+    border-radius: 5px;
+}
+
+.react-chatbot-kit-chat-input-buttons button:hover {
+    color: #fff;
+    background-color: #0d86de;
+}
+
+.chatbot-max .react-chatbot-kit-chat-input-buttons {
+    min-width: 348.5px;
+    width: calc(70% - 1.5px);
+    height: fit-content;
+    position: fixed;
+    left: 15%;
+    top: calc(100% - 4em);
+    /* background-color: #fff; */
+    /* background-color: #d8d8d8; */
+    background-color: #293344;
+    /* border: solid 1px #d8d8d8; */
+}
+
+.chatbot-max .react-chatbot-kit-chat-input-buttons button {
+    width: 46%;
+    height: fit-content;
+    height: 100%;
+    padding: 6px;
+    margin: 4px;
+    /* color: #157acc; */
+    color: white;
+    /* background-color: #E9E9E9; */
+    background-color: #525d73;
+    font-weight: normal;
+    font-size: 0.9rem;
+    max-height: 40px;
+}
+
+.chatbot-max .react-chatbot-kit-chat-input-buttons button:hover {
+    width: 46%;
+    height: fit-content;
+    height: 100%;
+    padding: 6px;
+    margin: 4px;
+    /* color: #157acc; */
+    color: #fff;
+    /* background-color: #E9E9E9; */
+    background-color: #0d86de;
+    font-weight: normal;
+    font-size: 0.9rem;
+    max-height: 40px;
+    border: none;
+    border-radius: 5px;
+}
+
+.chatbot-max .react-chatbot-kit-chat-input-buttons button:focus {
+    outline: none;
+}

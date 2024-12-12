@@ -1,0 +1,39 @@
+.chatbot-max .react-chatbot-kit-chat-container .feedback-buttons {
+    margin-left: calc(15% + 55px);
+    font-size: 0.85rem;
+}
+
+.feedback-buttons {
+    margin-left: 55px;
+    font-size: 0.85rem;
+}
+
+.feedback-text {
+    color: white;
+}
+
+.thumbs-up {
+    border: none;
+    background: none;
+    cursor: pointer;
+    margin: 0;
+    padding: 4px;
+    color: #157acc;
+}
+
+.thumbs-down {
+    border: none;
+    background: none;
+    cursor: pointer;
+    margin: 0;
+    padding: 4px;
+    color: #157acc;
+}
+
+.thumbs-up:focus {
+    outline: none;
+}
+
+.thumbs-down:focus {
+    outline: none;
+}

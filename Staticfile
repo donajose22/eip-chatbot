@@ -1,0 +1,4 @@
+root: build
+gzip: on
+location_include: includes/*.conf
+pushstate: enabled
