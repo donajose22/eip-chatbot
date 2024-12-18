@@ -32,7 +32,15 @@ const CustomMessage = (state: any, message: any) => {
                         <div className='sql-query-content' style={{ display: 'block' }} >{state.message.message['sql_query']}</div>
                     </>
                 )}
-
+                {state.message.message['time_taken'] && (
+                    <div className='timenote'>
+                        <br/>
+                        Time taken to generate response: {state.message.message['time_taken']} s
+                        <br />
+                        We are continuously working on improving our response time to enhance your experience. Thank you for your patience and understanding.
+                    </div> 
+                )}
+                
             </div>
         </div>
     )

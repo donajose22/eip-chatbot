@@ -68,9 +68,9 @@ class ActionProvider {
     // console.log(message);
     const loader = this.createCustomMessage("Test", "loader");
     this.addMessageToState(loader);
+
     let api_endpoint = service_constants.api_endpoint;
     let results = await fetch(api_endpoint + message);
-    // let results = await fetch("http://127.0.0.1:5000/generate/"+message);
     const response = await results.json();
     // console.log(response);
     const message2 = this.createCustomMessage(response, 'message', { payload: response });

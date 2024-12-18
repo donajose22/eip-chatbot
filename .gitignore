@@ -27,4 +27,4 @@ yarn-error.log*
 
 node_modules
 
-.zip
+*.zip

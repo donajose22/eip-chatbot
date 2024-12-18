@@ -102,3 +102,7 @@ table tr th:last-child {
 a {
   color: #2898ec;
 }
+
+.timenote {
+  display: block;
+}

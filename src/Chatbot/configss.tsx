@@ -6,7 +6,7 @@ import Feedback from "../Components/Feedback/Feedback";
 import CustomMessage from "../Components/CustomMessage/CustomMessage";
 import MenuMessage from "../Components/MenuMessage/MenuMessage";
 import FormButtons from "../Components/FormButtons/FormButtons";
-import Loader from "../Components/Loader";
+import Loader from "../Components/Loader/Loader";
 // import { IMessage } from './IMessages';
 // import IWidget from './IWidget';
 

@@ -1,11 +1,28 @@
 
-import React from 'react';
-import BotAvatar from './BotAvatar';
+import React, { useState, useEffect } from 'react';
+import BotAvatar from '../BotAvatar';
+import "./Loader.css"
 
 const Loader = () => {
+    const [milliseconds, setMilliseconds] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setMilliseconds(prevMilliseconds => prevMilliseconds + 100);
+    }, 100);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const seconds = Math.floor(milliseconds / 1000);
+  const displayMilliseconds = Math.floor((milliseconds % 1000) / 100);
+
     return (
         <div className='chatbot-loader-container'>
             <BotAvatar />
+            <table>
+                <tr>
+                <div>
             <svg
                 id='dots'
                 width='50px'
@@ -22,6 +39,16 @@ const Loader = () => {
                     </g>
                 </g>
             </svg>
+            </div>
+                </tr>
+                <tr>
+                <div className='timer'>
+            Generating: {seconds}.{displayMilliseconds} s
+            </div>
+                </tr>
+            </table>
+            
+            
         </div>
     );
 };
