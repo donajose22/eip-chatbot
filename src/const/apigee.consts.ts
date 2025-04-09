@@ -2,7 +2,8 @@ let env = process.env.REACT_APP_ENV || 'development'; //CHANGE REACT_APP_ENV TO 
 
 let development_apigee_const = {
   token_endpoint: 'https://apis-dev.intel.com/v1/auth/token',
-  id: 'd36a38f9-f7ff-4052-9660-9d1dd493c297',
+  isd: 'd36a38f9-f7ff-4052-9660-9d1dd493c297',
+  id: 'fc4d18f6-8074-48dc-b97e-7f3807754764',
   secret: process.env.REACT_APP_APIGEE_DEV_SECRET,
   proxy: {
     protocol: 'http',

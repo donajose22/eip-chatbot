@@ -14,3 +14,27 @@
     color: #2898ec;
     /* color: white; */
 }
+
+.topics-container {
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100%;
+}
+
+.topic-tiles {
+    margin: 5px;
+    border-radius: 5px;
+    width: 100%;
+    height: 3em;
+    border: none;
+}
+
+.topic-tiles:hover {
+    margin: 5px;
+    border-radius: 5px;
+    width: 100%;
+    height: 3em;
+    border: none;
+    background-color: #2898ec;
+    color: #fff;
+}
