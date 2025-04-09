@@ -67,7 +67,7 @@ class ActionProvider {
   handleQuery = async (message: string) => {
     // console.log(message);
     const loader = this.createCustomMessage("Test", "loader");
-    this.addMessageToState(loader);
+    this.addMessageToState(loader); 
 
     let api_endpoint = service_constants.api_endpoint;
     let results = await fetch(api_endpoint + message);

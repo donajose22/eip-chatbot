@@ -373,7 +373,7 @@
 .react-chatbot-kit-chat-message-container {
   padding: 0 17.5px 10px 17.5px;
   overflow: auto;
-  height: calc(100% - 95px);
+  height: calc(100% - 115px);
 }
 
 .react-chatbot-kit-chat-bot-message-container {

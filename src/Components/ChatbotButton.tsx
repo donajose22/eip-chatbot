@@ -40,6 +40,7 @@ const ChatbotButton: React.FC<ChatbotButtonProps> = ({ isMaximizedChatbot }) => 
   };
 
   const validator = (input: any) => {
+    input = input.trimStart().trimEnd();
     if (input.length > 0) return true;
     return false
   }
@@ -78,10 +79,10 @@ const ChatbotButton: React.FC<ChatbotButtonProps> = ({ isMaximizedChatbot }) => 
             />
 
           </div>
+
         </>
 
       )}
-
 
       {isMaximizedChatbot && (
         <div className='chatbot-max'>
