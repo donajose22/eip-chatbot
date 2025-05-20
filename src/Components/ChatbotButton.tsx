@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Chatbot from "react-chatbot-kit";
-import { createChatBotMessage, createClientMessage } from "react-chatbot-kit";
 import config from '../Chatbot/config';
 import MessageParser from "../Chatbot/MessageParser";
 import ActionProvider from "../Chatbot/ActionProvider";
@@ -8,6 +7,10 @@ import FormButtons from './FormButtons/FormButtons';
 import { FaRegWindowMinimize } from "react-icons/fa";
 import { MdOutlineFullscreen } from "react-icons/md";
 import eip from '../assets/AskEIPLogo.png'
+
+import { useMsal } from '@azure/msal-react';
+import { loginRequest } from '../authConfig';
+import { Client } from '@microsoft/microsoft-graph-client';
 
 
 
@@ -17,8 +20,8 @@ import { Link } from "react-router-dom";
 import '../App.css';
 
 interface ChatbotButtonProps {
-    isMaximizedChatbot: boolean;
-  }
+  isMaximizedChatbot: boolean;
+}
 
 const ChatbotButton: React.FC<ChatbotButtonProps> = ({ isMaximizedChatbot }) => {
 
@@ -46,6 +49,35 @@ const ChatbotButton: React.FC<ChatbotButtonProps> = ({ isMaximizedChatbot }) => 
     return false
   }
 
+  const { instance, accounts } = useMsal();
+  const [userDetails, setUserDetails] = useState({});
+
+  useEffect(() => {
+    if (accounts.length > 0) {
+      const account = accounts[0];
+      instance.acquireTokenSilent({
+        ...loginRequest,
+        account: account,
+      }).then(response => {
+        const graphClient = Client.init({
+          authProvider: (done) => {
+            done(null, response.accessToken);
+          },
+        });
+
+        graphClient.api('/me').get().then(user => {
+          setUserDetails(user);
+        }).catch(error => {
+          console.error(error);
+        });
+      }).catch(error => {
+        console.error(error);
+      });
+    }
+  }, [accounts, instance]);
+
+  // console.log(userDetails);
+
   return (
     <>
       {!isMaximizedChatbot && (
@@ -57,9 +89,7 @@ const ChatbotButton: React.FC<ChatbotButtonProps> = ({ isMaximizedChatbot }) => 
               <div className='chatbot-icon-open-button'><IoClose></IoClose></div>
             )}
             {!isOpen && (
-
-            //   <img src="../assets/AskEIPLogo.png" className='chatbot-icon' />
-            <img src={eip} className='chatbot-icon' />
+              <img src={eip} className='chatbot-icon' />
             )}
           </button>
 

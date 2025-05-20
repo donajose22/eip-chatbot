@@ -28,3 +28,4 @@ yarn-error.log*
 node_modules
 
 *.zip
+src/App.test.tsx

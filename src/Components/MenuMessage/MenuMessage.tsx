@@ -2,12 +2,30 @@ import React, { useState, useEffect, useRef } from 'react';
 import service_constants from '../../const/services.consts';
 import BotAvatar from "../BotAvatar";
 import './MenuMessage.css';
+import { getUserDetails } from '../../App';
 
 interface Topic {
     text: string;
     handler: (topic: { text: string; handler: Function; id: number }) => void;
     id: number;
 }
+
+
+export interface UserDetails {
+    businessPhones: string[];
+    displayName: string;
+    givenName: string;
+    jobTitle: string;
+    mail: string;
+    mobilePhone: string;
+    officeLocation: string;
+    preferredLanguage: string;
+    surname: string;
+    userPrincipalName: string;
+    id: string;
+}
+
+
 
 const MenuMessage = (props: any) => {
     const [topics, setTopics] = useState<Topic[]>([]);
@@ -55,13 +73,20 @@ const MenuMessage = (props: any) => {
         </button>
     ));
 
+    const userDetails = getUserDetails();
+
+
     return (
         <div className="react-chatbot-kit-chat-bot-message-container">
             <BotAvatar />
             <div className="react-chatbot-kit-chat-bot-message">
-                Hello and welcome! How can I assist you today? <br />
-                I specialize in 3rd Party DMS process-related queries and can provide information from the External IP Wiki, RDSE Wiki, DMS Wiki and EDIT database. <br />
-                Please select the topic that is most applicable from the options provided below.
+
+                Hello 
+                {
+                    userDetails ? ( <span><b> {userDetails.givenName} </b></span> ) : ( <span></span> )
+                }! How can I assist you today? <br />
+                I specialize in <b>EIP Operations</b> and can provide information from the External IP Wiki, RDSE Wiki, and EDIT database. I can also assist with tracking your <b>Jira</b> projects, tasks, and provide issue summaries.<br />
+                Please select the topic that best corresponds to your query.
                 <div className='topics-container'>
                     {topics.length > 0 ? (
                         topics.map((topic) => (

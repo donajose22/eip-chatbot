@@ -1,6 +1,8 @@
 // ActionProvider starter code
 import service_constants from "../const/services.consts";
 import Feedback from "../Components/Feedback/Feedback";
+import { getUserDetails } from "../App";
+
 
 class ActionProvider {
   createChatBotMessage: any;
@@ -36,7 +38,17 @@ class ActionProvider {
     this.setState((state: any) => ({ ...state, messages: [message] }));
     // let token = apigeeTokenGeneration();
     // console.log(token);
+
+    
   };
+
+
+  handleError = (errorMessage: string) => {
+    // const errorMessage = "Something went wrong while processing your request. Please select the topic again.";
+    const message2 = this.createChatBotMessage(errorMessage);
+    this.replacePrevMessage(message2);
+    this.mainMenuHandler();
+  }
 
 
   handleOption = (question: string) => {
@@ -52,30 +64,73 @@ class ActionProvider {
     const loader = this.createCustomMessage("Test", "loader");
     this.addMessageToState(loader);
 
-    let api_endpoint = service_constants.load_prompts_api_endpoint;
-    let results = await fetch(api_endpoint + topic.id);
-    console.log(results);
-    const message2 = this.createChatBotMessage("Topic selected. Please type in your question.");
-    this.replacePrevMessage(message2);
+    let user_details = getUserDetails();
 
-    const div = document.querySelector('.react-chatbot-kit-chat-input-container') as HTMLDivElement | null;
-    if(div) {
-      div.style.display = 'flex';
+    let api_endpoint = service_constants.load_prompts_api_endpoint + topic.id;
+    const data = { 'user': user_details };
+
+    console.log("before ");
+    let results = await fetch(api_endpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    console.log("after ");
+    console.log(results.status);
+
+    const response = await results.json();
+
+    if (results.status == 400) {
+      this.handleError(response['message']);
+      const div = document.querySelector('.react-chatbot-kit-chat-input-container') as HTMLDivElement | null;
+      if (div) {
+        div.style.display = 'none';
+      }
     }
+    else if (results.status == 200) {
+      const message2 = this.createChatBotMessage("Topic selected. Please type in your question.");
+      this.replacePrevMessage(message2);
+
+      const div = document.querySelector('.react-chatbot-kit-chat-input-container') as HTMLDivElement | null;
+      if (div) {
+        div.style.display = 'flex';
+      }
+    }
+
   }
 
 
   handleQuery = async (message: string) => {
+    // console.log("INSIDE HANDLE QUERY");
     const loader = this.createCustomMessage("Test", "loader");
     this.addMessageToState(loader);
 
-    let api_endpoint = service_constants.api_endpoint;
-    let results = await fetch(api_endpoint + message);
-    const response = await results.json();
-    // console.log(response);
-    const message2 = this.createCustomMessage(response, 'message', { payload: response });
-    message2.widget = 'feedback';
+    // get user details from cache
+    let user_details = getUserDetails();
 
+    // user details not present in cache
+    if(user_details == null){
+      this.handleError("Something went wrong while processing your request. Please select the topic again.");
+      return;
+    }
+    const user_wwid = user_details['jobTitle'];
+
+    let api_endpoint = service_constants.api_endpoint+"?wwid="+user_wwid+"&question="+message;
+    let results = await fetch(api_endpoint);
+    const response = await results.json();
+
+    if(results.status == 404) {
+      // status 404 - cache has expired
+      this.handleError(response['message']);
+      return;
+    }
+    
+    const message2 = this.createCustomMessage(response, 'message', { payload: response });
+    if(results.status == 200) { // only add feedback button if the response is successful
+      message2.widget = 'feedback';
+    }
 
     this.replacePrevMessage(message2);
   }

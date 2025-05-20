@@ -21,14 +21,14 @@ const CustomMessage = (state: any, message: any) => {
                 <div dangerouslySetInnerHTML={{ __html: state.message.message['response'] }}></div>
                 {state.message.message['is_query'] == "1" && isDisplayed == "none" && (
                     <>
-                        <button type="button" className="query-collapsible" onClick={expandCollapseContent}>SQL Query <div className='plusminus'>+</div></button>
+                        <button type="button" className="query-collapsible" onClick={expandCollapseContent}>Query <div className='plusminus'>+</div></button>
                         <div className='sql-query-content' style={{ display: 'none' }} >{state.message.message['query']}</div>
                     </>
                 )}
 
                 {state.message.message['is_query'] == "1" && isDisplayed == "block" && (
                     <>
-                        <button type="button" className="query-collapsible" onClick={expandCollapseContent}>SQL Query <div className='plusminus'>-</div></button>
+                        <button type="button" className="query-collapsible" onClick={expandCollapseContent}>Query <div className='plusminus'>-</div></button>
                         <div className='sql-query-content' style={{ display: 'block' }} >{state.message.message['query']}</div>
                     </>
                 )}

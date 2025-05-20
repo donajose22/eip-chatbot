@@ -11,41 +11,25 @@ const Feedback = (state: any) => {
     const setThumbsUp = async () => {
         setIsThumbsUp("up");
 
-        const data = {
-            "chat_id": state.message.message['id'],
-            "feedback": "1"
-        }
-
-        let api_endpoint = service_constants.feedback_api_endpoint;
-        api_endpoint = "http://127.0.0.1:5000/feedback"
+        let api_endpoint = service_constants.feedback_api_endpoint+"?chat_id="+state.message.message['id']+"&feedback=1";
         await fetch(api_endpoint, {
-            method: 'POST',
+            method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data) 
+            }
             });
-        console.log("FEEDBACK SENT SUCCESSFULLY");
     };
 
     const setThumbsDown = async () => {
         setIsThumbsUp("down");
 
-        const data = {
-            "chat_id": state.message.message['id'],
-            "feedback": "0"
-        }
-
-        let api_endpoint = service_constants.feedback_api_endpoint;
-        // api_endpoint = "http://127.0.0.1:5000/feedback";
+        let api_endpoint = service_constants.feedback_api_endpoint+"?chat_id="+state.message.message['id']+"&feedback=0";
         await fetch(api_endpoint, {
-            method: 'POST',
+            method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data) 
+            }
             });
-        console.log("FEEDBACK SENT SUCCESSFULLY");
     };
 
     return (
